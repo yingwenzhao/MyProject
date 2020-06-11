@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="dao.PayInstructionDefDoMapper" >
+  <resultMap id="BaseResultMap" type="model.PayInstructionDefDo" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="pay_type" property="payType" jdbcType="VARCHAR" />
+    <result column="pay_type_desc" property="payTypeDesc" jdbcType="VARCHAR" />
+    <result column="out_trans_type" property="outTransType" jdbcType="VARCHAR" />
+    <result column="pay_tool" property="payTool" jdbcType="VARCHAR" />
+    <result column="channel" property="channel" jdbcType="VARCHAR" />
+    <result column="pay_tool_name" property="payToolName" jdbcType="VARCHAR" />
+    <result column="section_no" property="sectionNo" jdbcType="INTEGER" />
+    <result column="position" property="position" jdbcType="INTEGER" />
+    <result column="instruction" property="instruction" jdbcType="VARCHAR" />
+    <result column="forward_def_id" property="forwardDefId" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, pay_type, pay_type_desc, out_trans_type, pay_tool, channel, pay_tool_name, section_no, 
+    position, instruction, forward_def_id, create_time, update_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_jintang_pay_instruction_def
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from t_jintang_pay_instruction_def
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="model.PayInstructionDefDo" >
+    insert into t_jintang_pay_instruction_def (id, pay_type, pay_type_desc, 
+      out_trans_type, pay_tool, channel, 
+      pay_tool_name, section_no, position, 
+      instruction, forward_def_id, create_time, 
+      update_time)
+    values (#{id,jdbcType=BIGINT}, #{payType,jdbcType=VARCHAR}, #{payTypeDesc,jdbcType=VARCHAR}, 
+      #{outTransType,jdbcType=VARCHAR}, #{payTool,jdbcType=VARCHAR}, #{channel,jdbcType=VARCHAR}, 
+      #{payToolName,jdbcType=VARCHAR}, #{sectionNo,jdbcType=INTEGER}, #{position,jdbcType=INTEGER}, 
+      #{instruction,jdbcType=VARCHAR}, #{forwardDefId,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="model.PayInstructionDefDo" >
+    insert into t_jintang_pay_instruction_def
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="payType != null" >
+        pay_type,
+      </if>
+      <if test="payTypeDesc != null" >
+        pay_type_desc,
+      </if>
+      <if test="outTransType != null" >
+        out_trans_type,
+      </if>
+      <if test="payTool != null" >
+        pay_tool,
+      </if>
+      <if test="channel != null" >
+        channel,
+      </if>
+      <if test="payToolName != null" >
+        pay_tool_name,
+      </if>
+      <if test="sectionNo != null" >
+        section_no,
+      </if>
+      <if test="position != null" >
+        position,
+      </if>
+      <if test="instruction != null" >
+        instruction,
+      </if>
+      <if test="forwardDefId != null" >
+        forward_def_id,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="payType != null" >
+        #{payType,jdbcType=VARCHAR},
+      </if>
+      <if test="payTypeDesc != null" >
+        #{payTypeDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="outTransType != null" >
+        #{outTransType,jdbcType=VARCHAR},
+      </if>
+      <if test="payTool != null" >
+        #{payTool,jdbcType=VARCHAR},
+      </if>
+      <if test="channel != null" >
+        #{channel,jdbcType=VARCHAR},
+      </if>
+      <if test="payToolName != null" >
+        #{payToolName,jdbcType=VARCHAR},
+      </if>
+      <if test="sectionNo != null" >
+        #{sectionNo,jdbcType=INTEGER},
+      </if>
+      <if test="position != null" >
+        #{position,jdbcType=INTEGER},
+      </if>
+      <if test="instruction != null" >
+        #{instruction,jdbcType=VARCHAR},
+      </if>
+      <if test="forwardDefId != null" >
+        #{forwardDefId,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="model.PayInstructionDefDo" >
+    update t_jintang_pay_instruction_def
+    <set >
+      <if test="payType != null" >
+        pay_type = #{payType,jdbcType=VARCHAR},
+      </if>
+      <if test="payTypeDesc != null" >
+        pay_type_desc = #{payTypeDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="outTransType != null" >
+        out_trans_type = #{outTransType,jdbcType=VARCHAR},
+      </if>
+      <if test="payTool != null" >
+        pay_tool = #{payTool,jdbcType=VARCHAR},
+      </if>
+      <if test="channel != null" >
+        channel = #{channel,jdbcType=VARCHAR},
+      </if>
+      <if test="payToolName != null" >
+        pay_tool_name = #{payToolName,jdbcType=VARCHAR},
+      </if>
+      <if test="sectionNo != null" >
+        section_no = #{sectionNo,jdbcType=INTEGER},
+      </if>
+      <if test="position != null" >
+        position = #{position,jdbcType=INTEGER},
+      </if>
+      <if test="instruction != null" >
+        instruction = #{instruction,jdbcType=VARCHAR},
+      </if>
+      <if test="forwardDefId != null" >
+        forward_def_id = #{forwardDefId,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="model.PayInstructionDefDo" >
+    update t_jintang_pay_instruction_def
+    set pay_type = #{payType,jdbcType=VARCHAR},
+      pay_type_desc = #{payTypeDesc,jdbcType=VARCHAR},
+      out_trans_type = #{outTransType,jdbcType=VARCHAR},
+      pay_tool = #{payTool,jdbcType=VARCHAR},
+      channel = #{channel,jdbcType=VARCHAR},
+      pay_tool_name = #{payToolName,jdbcType=VARCHAR},
+      section_no = #{sectionNo,jdbcType=INTEGER},
+      position = #{position,jdbcType=INTEGER},
+      instruction = #{instruction,jdbcType=VARCHAR},
+      forward_def_id = #{forwardDefId,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

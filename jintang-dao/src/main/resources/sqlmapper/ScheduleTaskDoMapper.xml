@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="dao.ScheduleTaskDoMapper">
+    <resultMap id="BaseResultMap" type="model.ScheduleTaskDo">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="task_type" property="taskType" jdbcType="VARCHAR"/>
+        <result column="schedule_status" property="scheduleStatus" jdbcType="VARCHAR"/>
+        <result column="schedule_times" property="scheduleTimes" jdbcType="INTEGER"/>
+        <result column="schedule_done" property="scheduleDone" jdbcType="INTEGER"/>
+        <result column="last_run_time" property="lastRunTime" jdbcType="TIMESTAMP"/>
+        <result column="next_run_time" property="nextRunTime" jdbcType="TIMESTAMP"/>
+        <result column="machine" property="machine" jdbcType="VARCHAR"/>
+        <result column="ext" property="ext" jdbcType="VARCHAR"/>
+        <result column="next_run_interval" property="nextRunInterval" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, task_type, schedule_status, schedule_times, schedule_done, last_run_time, next_run_time, 
+    machine, ext, next_run_interval, create_time, update_time
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from t_jintang_schedule_task
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+
+    <select id="lockScheduleTask" parameterType="map" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_jintang_schedule_task
+        where now()>=next_run_time
+        and schedule_status in ('INIT','WAIT_RETRY')
+        and #{delayTime,jdbctype=TIMESTAMP}>create_time
+        limit ${batchCount}
+        for update nowait
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from t_jintang_schedule_task
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+    <insert id="insert" parameterType="model.ScheduleTaskDo">
+    insert into t_jintang_schedule_task (id, task_type, schedule_status, 
+      schedule_times, schedule_done, last_run_time, 
+      next_run_time, machine, ext, 
+      next_run_interval, create_time, update_time
+      )
+    values (#{id,jdbcType=BIGINT}, #{taskType,jdbcType=VARCHAR}, #{scheduleStatus,jdbcType=VARCHAR}, 
+      #{scheduleTimes,jdbcType=INTEGER}, #{scheduleDone,jdbcType=INTEGER}, #{lastRunTime,jdbcType=TIMESTAMP}, 
+      #{nextRunTime,jdbcType=TIMESTAMP}, #{machine,jdbcType=VARCHAR}, #{ext,jdbcType=VARCHAR}, 
+      #{nextRunInterval,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+    <insert id="insertSelective" parameterType="model.ScheduleTaskDo">
+        insert into t_jintang_schedule_task
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="taskType != null">
+                task_type,
+            </if>
+            <if test="scheduleStatus != null">
+                schedule_status,
+            </if>
+            <if test="scheduleTimes != null">
+                schedule_times,
+            </if>
+            <if test="scheduleDone != null">
+                schedule_done,
+            </if>
+            <if test="lastRunTime != null">
+                last_run_time,
+            </if>
+            <if test="nextRunTime != null">
+                next_run_time,
+            </if>
+            <if test="machine != null">
+                machine,
+            </if>
+            <if test="ext != null">
+                ext,
+            </if>
+            <if test="nextRunInterval != null">
+                next_run_interval,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="taskType != null">
+                #{taskType,jdbcType=VARCHAR},
+            </if>
+            <if test="scheduleStatus != null">
+                #{scheduleStatus,jdbcType=VARCHAR},
+            </if>
+            <if test="scheduleTimes != null">
+                #{scheduleTimes,jdbcType=INTEGER},
+            </if>
+            <if test="scheduleDone != null">
+                #{scheduleDone,jdbcType=INTEGER},
+            </if>
+            <if test="lastRunTime != null">
+                #{lastRunTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="nextRunTime != null">
+                #{nextRunTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="machine != null">
+                #{machine,jdbcType=VARCHAR},
+            </if>
+            <if test="ext != null">
+                #{ext,jdbcType=VARCHAR},
+            </if>
+            <if test="nextRunInterval != null">
+                #{nextRunInterval,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="model.ScheduleTaskDo">
+        update t_jintang_schedule_task
+        <set>
+            <if test="taskType != null">
+                task_type = #{taskType,jdbcType=VARCHAR},
+            </if>
+            <if test="scheduleStatus != null">
+                schedule_status = #{scheduleStatus,jdbcType=VARCHAR},
+            </if>
+            <if test="scheduleTimes != null">
+                schedule_times = #{scheduleTimes,jdbcType=INTEGER},
+            </if>
+            <if test="scheduleDone != null">
+                schedule_done = #{scheduleDone,jdbcType=INTEGER},
+            </if>
+            <if test="lastRunTime != null">
+                last_run_time = #{lastRunTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="nextRunTime != null">
+                next_run_time = #{nextRunTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="machine != null">
+                machine = #{machine,jdbcType=VARCHAR},
+            </if>
+            <if test="ext != null">
+                ext = #{ext,jdbcType=VARCHAR},
+            </if>
+            <if test="nextRunInterval != null">
+                next_run_interval = #{nextRunInterval,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="model.ScheduleTaskDo">
+    update t_jintang_schedule_task
+    set task_type = #{taskType,jdbcType=VARCHAR},
+      schedule_status = #{scheduleStatus,jdbcType=VARCHAR},
+      schedule_times = #{scheduleTimes,jdbcType=INTEGER},
+      schedule_done = #{scheduleDone,jdbcType=INTEGER},
+      last_run_time = #{lastRunTime,jdbcType=TIMESTAMP},
+      next_run_time = #{nextRunTime,jdbcType=TIMESTAMP},
+      machine = #{machine,jdbcType=VARCHAR},
+      ext = #{ext,jdbcType=VARCHAR},
+      next_run_interval = #{nextRunInterval,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="dao.OrderMapper" >
+  <resultMap id="BaseResultMap" type="model.Order" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="tx_type" property="txType" jdbcType="VARCHAR" />
+    <result column="merc_id" property="mercId" jdbcType="VARCHAR" />
+    <result column="merc_cust_id" property="mercCustId" jdbcType="VARCHAR" />
+    <result column="channel_type" property="channelType" jdbcType="VARCHAR" />
+    <result column="channel_seq_no" property="channelSeqNo" jdbcType="VARCHAR" />
+    <result column="product_code" property="productCode" jdbcType="VARCHAR" />
+    <result column="order_time_out" property="orderTimeOut" jdbcType="VARCHAR" />
+    <result column="order_amt" property="orderAmt" jdbcType="DECIMAL" />
+    <result column="refund_amt" property="refundAmt" jdbcType="DECIMAL" />
+    <result column="org_order_no" property="orgOrderNo" jdbcType="VARCHAR" />
+    <result column="order_status" property="orderStatus" jdbcType="VARCHAR" />
+    <result column="trans_id" property="transId" jdbcType="VARCHAR" />
+    <result column="request_time" property="requestTime" jdbcType="TIMESTAMP" />
+    <result column="request_complete_time" property="requestCompleteTime" jdbcType="TIMESTAMP" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="cust_id" property="custId" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, tx_type, merc_id, merc_cust_id, channel_type, channel_seq_no, product_code, order_time_out, 
+    order_amt, refund_amt, org_order_no, order_status, trans_id, request_time, request_complete_time, 
+    create_time, update_time, cust_id
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_jintang_order
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from t_jintang_order
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="model.Order" >
+    insert into t_jintang_order (id, tx_type, merc_id, 
+      merc_cust_id, channel_type, channel_seq_no, 
+      product_code, order_time_out, order_amt, 
+      refund_amt, org_order_no, order_status, 
+      trans_id, request_time, request_complete_time, 
+      create_time, update_time, cust_id
+      )
+    values (#{id,jdbcType=BIGINT}, #{txType,jdbcType=VARCHAR}, #{mercId,jdbcType=VARCHAR}, 
+      #{mercCustId,jdbcType=VARCHAR}, #{channelType,jdbcType=VARCHAR}, #{channelSeqNo,jdbcType=VARCHAR}, 
+      #{productCode,jdbcType=VARCHAR}, #{orderTimeOut,jdbcType=VARCHAR}, #{orderAmt,jdbcType=DECIMAL}, 
+      #{refundAmt,jdbcType=DECIMAL}, #{orgOrderNo,jdbcType=VARCHAR}, #{orderStatus,jdbcType=VARCHAR}, 
+      #{transId,jdbcType=VARCHAR}, #{requestTime,jdbcType=TIMESTAMP}, #{requestCompleteTime,jdbcType=TIMESTAMP}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{custId,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="model.Order" >
+    insert into t_jintang_order
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="txType != null" >
+        tx_type,
+      </if>
+      <if test="mercId != null" >
+        merc_id,
+      </if>
+      <if test="mercCustId != null" >
+        merc_cust_id,
+      </if>
+      <if test="channelType != null" >
+        channel_type,
+      </if>
+      <if test="channelSeqNo != null" >
+        channel_seq_no,
+      </if>
+      <if test="productCode != null" >
+        product_code,
+      </if>
+      <if test="orderTimeOut != null" >
+        order_time_out,
+      </if>
+      <if test="orderAmt != null" >
+        order_amt,
+      </if>
+      <if test="refundAmt != null" >
+        refund_amt,
+      </if>
+      <if test="orgOrderNo != null" >
+        org_order_no,
+      </if>
+      <if test="orderStatus != null" >
+        order_status,
+      </if>
+      <if test="transId != null" >
+        trans_id,
+      </if>
+      <if test="requestTime != null" >
+        request_time,
+      </if>
+      <if test="requestCompleteTime != null" >
+        request_complete_time,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="custId != null" >
+        cust_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="txType != null" >
+        #{txType,jdbcType=VARCHAR},
+      </if>
+      <if test="mercId != null" >
+        #{mercId,jdbcType=VARCHAR},
+      </if>
+      <if test="mercCustId != null" >
+        #{mercCustId,jdbcType=VARCHAR},
+      </if>
+      <if test="channelType != null" >
+        #{channelType,jdbcType=VARCHAR},
+      </if>
+      <if test="channelSeqNo != null" >
+        #{channelSeqNo,jdbcType=VARCHAR},
+      </if>
+      <if test="productCode != null" >
+        #{productCode,jdbcType=VARCHAR},
+      </if>
+      <if test="orderTimeOut != null" >
+        #{orderTimeOut,jdbcType=VARCHAR},
+      </if>
+      <if test="orderAmt != null" >
+        #{orderAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="refundAmt != null" >
+        #{refundAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="orgOrderNo != null" >
+        #{orgOrderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="orderStatus != null" >
+        #{orderStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="transId != null" >
+        #{transId,jdbcType=VARCHAR},
+      </if>
+      <if test="requestTime != null" >
+        #{requestTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="requestCompleteTime != null" >
+        #{requestCompleteTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="custId != null" >
+        #{custId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="model.Order" >
+    update t_jintang_order
+    <set >
+      <if test="txType != null" >
+        tx_type = #{txType,jdbcType=VARCHAR},
+      </if>
+      <if test="mercId != null" >
+        merc_id = #{mercId,jdbcType=VARCHAR},
+      </if>
+      <if test="mercCustId != null" >
+        merc_cust_id = #{mercCustId,jdbcType=VARCHAR},
+      </if>
+      <if test="channelType != null" >
+        channel_type = #{channelType,jdbcType=VARCHAR},
+      </if>
+      <if test="channelSeqNo != null" >
+        channel_seq_no = #{channelSeqNo,jdbcType=VARCHAR},
+      </if>
+      <if test="productCode != null" >
+        product_code = #{productCode,jdbcType=VARCHAR},
+      </if>
+      <if test="orderTimeOut != null" >
+        order_time_out = #{orderTimeOut,jdbcType=VARCHAR},
+      </if>
+      <if test="orderAmt != null" >
+        order_amt = #{orderAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="refundAmt != null" >
+        refund_amt = #{refundAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="orgOrderNo != null" >
+        org_order_no = #{orgOrderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="orderStatus != null" >
+        order_status = #{orderStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="transId != null" >
+        trans_id = #{transId,jdbcType=VARCHAR},
+      </if>
+      <if test="requestTime != null" >
+        request_time = #{requestTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="requestCompleteTime != null" >
+        request_complete_time = #{requestCompleteTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="custId != null" >
+        cust_id = #{custId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="model.Order" >
+    update t_jintang_order
+    set tx_type = #{txType,jdbcType=VARCHAR},
+      merc_id = #{mercId,jdbcType=VARCHAR},
+      merc_cust_id = #{mercCustId,jdbcType=VARCHAR},
+      channel_type = #{channelType,jdbcType=VARCHAR},
+      channel_seq_no = #{channelSeqNo,jdbcType=VARCHAR},
+      product_code = #{productCode,jdbcType=VARCHAR},
+      order_time_out = #{orderTimeOut,jdbcType=VARCHAR},
+      order_amt = #{orderAmt,jdbcType=DECIMAL},
+      refund_amt = #{refundAmt,jdbcType=DECIMAL},
+      org_order_no = #{orgOrderNo,jdbcType=VARCHAR},
+      order_status = #{orderStatus,jdbcType=VARCHAR},
+      trans_id = #{transId,jdbcType=VARCHAR},
+      request_time = #{requestTime,jdbcType=TIMESTAMP},
+      request_complete_time = #{requestCompleteTime,jdbcType=TIMESTAMP},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      cust_id = #{custId,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

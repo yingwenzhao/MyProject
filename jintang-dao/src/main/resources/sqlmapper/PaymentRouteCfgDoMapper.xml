@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="dao.PaymentRouteCfgDoMapper" >
+  <resultMap id="BaseResultMap" type="model.PaymentRouteCfgDo" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="route_code" property="routeCode" jdbcType="VARCHAR" />
+    <result column="route_type" property="routeType" jdbcType="VARCHAR" />
+    <result column="route_desc" property="routeDesc" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="route_executor" property="routeExecutor" jdbcType="VARCHAR" />
+    <result column="ext" property="ext" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, route_code, route_type, route_desc, status, route_executor, ext, create_time, 
+    update_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_jintang_payment_route_cfg
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from t_jintang_payment_route_cfg
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="model.PaymentRouteCfgDo" >
+    insert into t_jintang_payment_route_cfg (id, route_code, route_type, 
+      route_desc, status, route_executor, 
+      ext, create_time, update_time
+      )
+    values (#{id,jdbcType=BIGINT}, #{routeCode,jdbcType=VARCHAR}, #{routeType,jdbcType=VARCHAR}, 
+      #{routeDesc,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, #{routeExecutor,jdbcType=VARCHAR}, 
+      #{ext,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="model.PaymentRouteCfgDo" >
+    insert into t_jintang_payment_route_cfg
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="routeCode != null" >
+        route_code,
+      </if>
+      <if test="routeType != null" >
+        route_type,
+      </if>
+      <if test="routeDesc != null" >
+        route_desc,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="routeExecutor != null" >
+        route_executor,
+      </if>
+      <if test="ext != null" >
+        ext,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="routeCode != null" >
+        #{routeCode,jdbcType=VARCHAR},
+      </if>
+      <if test="routeType != null" >
+        #{routeType,jdbcType=VARCHAR},
+      </if>
+      <if test="routeDesc != null" >
+        #{routeDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="routeExecutor != null" >
+        #{routeExecutor,jdbcType=VARCHAR},
+      </if>
+      <if test="ext != null" >
+        #{ext,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="model.PaymentRouteCfgDo" >
+    update t_jintang_payment_route_cfg
+    <set >
+      <if test="routeCode != null" >
+        route_code = #{routeCode,jdbcType=VARCHAR},
+      </if>
+      <if test="routeType != null" >
+        route_type = #{routeType,jdbcType=VARCHAR},
+      </if>
+      <if test="routeDesc != null" >
+        route_desc = #{routeDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="routeExecutor != null" >
+        route_executor = #{routeExecutor,jdbcType=VARCHAR},
+      </if>
+      <if test="ext != null" >
+        ext = #{ext,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="model.PaymentRouteCfgDo" >
+    update t_jintang_payment_route_cfg
+    set route_code = #{routeCode,jdbcType=VARCHAR},
+      route_type = #{routeType,jdbcType=VARCHAR},
+      route_desc = #{routeDesc,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      route_executor = #{routeExecutor,jdbcType=VARCHAR},
+      ext = #{ext,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
