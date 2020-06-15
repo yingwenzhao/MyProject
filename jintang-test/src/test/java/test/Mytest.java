@@ -21,7 +21,7 @@ public class Mytest extends JintangTest {
     public void orderTest(){
 
         Order order = new Order();
-        order.setId(12293L);
+        order.setId(125L);
         order.setTxType("38");
         order.setMercId("5435344");
         order.setMercCustId("5555555");
