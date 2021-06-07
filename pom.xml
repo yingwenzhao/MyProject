@@ -20,7 +20,7 @@
         <lombok.version>1.16.18</lombok.version>
         <slf4j-api.version>1.7.25</slf4j-api.version>
         <logback-core.version>1.1.11</logback-core.version>
-        <logback-classic.version>1.1.11</logback-classic.version>
+        <logback-classic.version>1.2.0</logback-classic.version>
         <mockito.version>2.8.47</mockito.version>
         <commons-lang-version>2.6</commons-lang-version>
     </properties>
