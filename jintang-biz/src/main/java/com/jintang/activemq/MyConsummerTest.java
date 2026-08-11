@@ -16,6 +16,8 @@ public class MyConsummerTest {
     }
 
 
+
+
     private static void myConsummerTest() {
         Connection connection = null;
         Session session = null;
